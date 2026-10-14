@@ -1,0 +1,118 @@
+Short excerpt of the FIA 2025 Formula 1 Sporting Regulations (Issue 5, 30 April 2025),
+(c) FIA. Used only as test input. Each page keeps its first lines exactly as unpdf extracts them;
+the rest of the page is left out. Everything above the first "=== page" line is ignored.
+
+=== page 1 ===
+2025 Formula 1 Sporting Regulations 1/119 30 April 2025
+©2025 Fédération Internationale de l’Automobile Issue 5
+2025 FORMULA ONE SPORTING REGULATIONS
+PUBLISHED ON 30 APRIL 2025
+Issue 5
+Convention:
+Black text: 2025 F1 Sporting Regulations Issue 4, approved by the WMSC on 26/02/25.
+Pink Text: Changes relative to 2025 F1 Sporting Regulations Issue 4, approved by the WMSC on 30/04/2025.
+ART CONTENTS PAGE
+1 REGULATIONS 2
+2 GENERAL UNDERTAKING 2
+3 GENERAL CONDITIONS 2
+4 LICENCES 3
+5 CHAMPIONSHIP COMPETITIONS 3
+6 WORLD CHAMPIONSHIP 4
+7 DEAD HEAT 6
+8 COMPETITORS APPLICATIONS 7
+9 CAR LIVERY AND COMPETITION NUMBERS 8
+10 TRACK RUNNING TIME OUTSIDE A
+COMPETITION 8
+11 PROMOTER 16
+12 ORGANISATION OF COMPETITIONS 17
+13 INSURANCE 17
+14 FIA DELEGATES 17
+
+=== page 3 ===
+2025 Formula 1 Sporting Regulations 3/119 30 April 2025
+©2025 Fédération Internationale de l’Automobile Issue 5
+3.4 All persons concerned in any way with an entered car or present in any other capacity
+whatsoever in the paddock, pit lane, or track must always wear an appropriate pass.
+3.5 No pass may be issued or used other than with the agreement of the FIA. A pass may be used
+only by the person and for the purpose for which it was issued.
+3.6 Each Competitor must hold the minimum of 3 Star FIA Environmental Accreditation.
+3.7 Each Competitor and each PU Manufacturer must ensure that upon request the FIA and persons
+authorised by it are granted such access, without undue delay, to its premises, facilities,
+individuals, information and documentation (whether these are stored digitally or not), as it may
+reasonably require to perform its regulatory function as provided for by the Regulations.
+4) LICENCES
+4.1 All drivers, Competitors and officials participating in the Championship must hold an FIA Super
+Licence. Applications for Super Licences must be made annually to the FIA through the
+applicant’s ASN.
+4.2 With the exception of a reprimand or fine, when a penalty is applied under the Code or Article
+54.3 the stewards may impose penalty points on a driver’s Super Licence. If a driver accrues
+twelve (12) penalty points his licence will be suspended for the following Competition, following
+which twelve (12) points will be removed from the licence.
+Penalty points will remain on a driver’s Super Licence for a period of twelve (12) months after
+which they will be respectively removed on the twelve (12) month anniversary of their
+imposition.
+5) CHAMPIONSHIP COMPETITIONS
+5.1 Competitions are reserved for Formula One cars as defined in the Technical Regulations.
+5.2 Each Competition will have the status of an international restricted competition.
+5.3 A sprint session will take place at up to six (6) Competitions.
+a) The distance of each sprint session, from the start signal referred to in Article 43.11 to the
+end-of-session signal referred to in Article 59.1, shall be equal to the least number of
+complete laps which exceed a distance of 100km, with the exception of the following
+circumstance:
+i) If the formation lap is started behind the safety car (see Article 49) the number of
+sprint session laps will be reduced by the number of laps carried out by the safety
+car minus one.
+An exception to the provisions of Article 59.1 for the end-of-session signal will be made
+under the following circumstances:
+ii) Should one (1) hour elapse from the start signal before the scheduled sprint session
+distance is completed, the leader will be shown the end-of-session signal when he
+crosses the control line (the Line) at the end of the lap following the lap during
+
+=== page 68 ===
+2025 Formula 1 Sporting Regulations 68/119 30 April 2025
+©2025 Fédération Internationale de l’Automobile Issue 5
+56.7 When the clerk of the course decides it is safe to end the VSC procedure the message “VSC
+ENDING” will be sent to all Competitors via the official messaging system and, at any time
+between 10 and 15 seconds later, “VSC” on the FIA light panels will change to green and drivers
+may continue the session or continue racing immediately. After 30 seconds the green lights will
+be extinguished.
+56.8 Each lap completed whist the VSC procedure is in use during a sprint session or the race will be
+counted as a lap.
+57) SUSPENDING A SPRINT SESSION OR A RACE
+57.1 If Competitors or officials are placed in immediate physical danger by cars running on the track,
+and the clerk of the course deems circumstances are such that the track cannot be negotiated
+safely, even behind the safety car, the sprint session or the race will be suspended.
+Should it become necessary to suspend the sprint session or the race, the clerk of the course
+will order red flags to be shown at all marshal posts and the abort orange lights on the start
+gantry to be illuminated shown at the Line.
+57.2 When the signal is given overtaking is forbidden, the pit exit will be closed and all cars must
+proceed slowly into the pit lane. The first car to arrive in the pit lane should proceed directly to
+the pit exit staying in the fast lane, all the other cars should form up in a line behind the first car.
+In exceptional circumstances, for reasons of safety the pit entry may be closed before cars have
+returned to the pit lane. In such circumstances all cars must proceed slowly to the starting grid,
+the first car to arrive on the grid should occupy pole position and others should fill the remaining
+grid positions in the order they arrive. The remainder of the procedures detailed in Articles 57.3,
+57.4, 57.5 and 58 shall remain unchanged, but will be conducted on the grid instead of in the
+fast lane.
+
+=== page 111 ===
+2025 Formula 1 Sporting Regulations 111/119 30 April 2025
+©2025 Fédération Internationale de l’Automobile Issue 5
+APPENDIX 8
+POWER UNIT TEST BENCH RESTRICTIONS
+1 Engine dyno test limitations
+a) Definitions:
+- Engine Test Bench: An Engine Test Bench is either a Power Unit Test Bench, a Power Train Test
+Bench or a Full Car Dyno.
+- Power Unit Test Bench: A test bench facility cell where a fired engine with more than 1 cylinder
+representative of a Formula One engine may be tested. In addition to test bench components,
+
+=== page 119 ===
+2025 Formula 1 Sporting Regulations 119/119 30 April 2025
+©2025 Fédération Internationale de l’Automobile Issue 5
+APPENDIX 9
+APPROVED CHANGES FOR SUBSEQUENT YEARS
+Convention:
+Dark red text: All changes previously agreed for subsequent years
+Dark red highlighted (yellow) text: new changes for subsequent years, approved by the WMSC
+1 Changes for 2026
