@@ -1,0 +1,157 @@
+Short excerpt of the FIA 2026 Formula 1 Sporting Regulations (Section B, Issue 07, 25 June 2026),
+(c) FIA. Used only as test input. Each page keeps its first lines exactly as unpdf extracts them;
+the rest of the page is left out. Everything above the first "=== page" line is ignored.
+
+=== page 1 ===
+SECTION B: SPORTING REGULATIONS 0B
+B1
+2026 Formula 1: Sporting Regulations
+©2026 Fédération Internationale de l’Automobile
+25 June 2026
+Issue 07
+SECTION B: SPORTING REGULATIONS
+Version: Issue 07
+Status: PUBLISHED
+Date: 25/06/2026
+WMSC approval date: 23/06/2026
+CONVENTION:
+Black Text: Text unchanged from 2026 FIA F1 Regulations - Section B [Sporting] – Iss 06
+Pink Text: Changes relative to 2026 FIA F1 Regulations - Section B [Sporting] – Iss 06, approved by
+the WMSC on 23/06/26
+[Red Text]: Information on applicable Governance and relevant Advisory Committee
+[Orange Text]: Reference information on relevant FIA F1 Documents
+[Green Text]: Comments / explanations / indication of further work: non-binding and non-regulatory
+CONTENTS:
+ARTICLE B1: ORGANISATION OF A COMPETITION 4
+B1.1 General Principles & Provisions 4
+B1.2 FIA Delegates 4
+B1.3 Officials 5
+B1.4 Official Meetings 6
+B1.5 General Safety 6
+B1.6 Pit Entry Road, Pit Lane And Pit Exit Road 8
+B1.7 Changes Of Driver 11
+B1.8 Driving 12
+B1.9 Incidents, Infringements & Penalties 13
+ARTICLE B2: FORMAT OF A COMPETITION 17
+B2.1 Free Practice Session(s) 17
+B2.2 Sprint Qualifying Session 18
+B2.3 Sprint Session 19
+B2.4 Race Qualifying Session 21
+B2.5 Race Session 23
+ARTICLE B3: PROCEDURES DURING A COMPETITION 26
+B3.1 Scrutineering 26
+B3.2 Weighing 27
+B3.3 Covering of Components 28
+B3.4 Sealing of Cars 28
+B3.5 Pre-Sprint & Pre-Race Parc Fermé 29
+B3.6 Post Sprint & Post Race Parc Fermé 31
+
+=== page 2 ===
+SECTION B: SPORTING REGULATIONS 0B
+B2
+2026 Formula 1: Sporting Regulations
+©2026 Fédération Internationale de l’Automobile
+25 June 2026
+Issue 07
+ARTICLE B4: LAP TIME CLASSIFIED SESSIONS (LTCS) 32
+B4.1 General Provisions for LTCS 32
+B4.2 Specific Provisions for Free Practice Session(s) 33
+B4.3 Specific Provisions for Sprint Qualifying and Qualifying Session(s) 33
+ARTICLE B5: TOTAL TIME CLASSIFIED SESSIONS (TTCS) 34
+B5.1 General Provisions for TTCS 34
+
+=== page 4 ===
+SECTION B: SPORTING REGULATIONS 0B
+B4
+2026 Formula 1: Sporting Regulations
+©2026 Fédération Internationale de l’Automobile
+25 June 2026
+Issue 07
+ARTICLE B1: ORGANISATION OF A COMPETITION
+Advisory Committee: SAC
+Governance: F1 Commission / WMSC
+B1.1 General Principles & Provisions
+B1.1.1 A Competition commences four (4) hours before FP1 is scheduled to start and ends at the time for
+the lodging of a protest under the terms of the ISC or the time when a technical or sporting
+certification has been carried out under the terms of the ISC, whichever is the later.
+B1.1.2 Instructions And Communications To Competitors
+a. The stewards or Race Director may give instructions to Competitors by means of special
+circulars in accordance with the Code. These circulars will be distributed to all Competitors
+who must acknowledge receipt.
+b. All classifications and results of free practice, sprint qualifying session, sprint session,
+qualifying session, and the Race, as well as all decisions issued by the officials, will be
+published using the Document Management System. Any decision or communication
+concerning a particular Competitor should be given to them within twenty-five (25) minutes of
+such decision, and receipt must be acknowledged.
+B1.1.3 Unless written permission has been given by the FIA to do otherwise, the circuit may only be used
+for purposes other than the Competition after the last free practice session on each day of practice,
+after Sprint Qualifying, after Qualifying, and on the day of the Race no less than one (1) hour before
+the Pit Lane exit is opened to allow F1 Cars to cover reconnaissance laps.
+
+=== page 47 ===
+SECTION B: SPORTING REGULATIONS 0B
+B47
+2026 Formula 1: Sporting Regulations
+©2026 Fédération Internationale de l’Automobile
+25 June 2026
+Issue 07
+B5.14 Suspension Procedure(s)
+B5.14.1 Suspension of a Starting Procedure
+If at any time after the formation laps behind the Safety Car have commenced, track conditions are
+considered unsuitable to start the TTCS, the message “STARTING PROCEDURE SUSPENDED” will
+be sent to all Competitors, red flags will be shown at all marshal posts and at the line, and the
+orange lights on the start gantry will be illuminated. All F1 Cars must enter the Pit Lane behind the
+Safety Car.
+The first F1 Car to arrive in the Pit Lane should proceed directly to the Pit Lane exit, unless an
+alternative location in the Pit Lane has been defined by the Race Director. All the other F1 Cars
+should form up in a line behind the first F1 Car in the order they entered the Pit Lane behind the
+Safety Car when the starting procedure was suspended. All cars must stay in the Fast Lane.
+In exceptional circumstances, for reasons of safety the pit entry may be closed before F1 Cars have
+returned to the Pit Lane. In such circumstances all F1 Cars must proceed slowly to the starting grid,
+the first F1 Car to arrive on the grid should occupy pole position and others should fill the remaining
+grid positions in the order they arrive.
+The procedures described in Article B5.15 must then be followed.
+B5.14.2 Suspension of a TTCS
+If the Race Director deems it is necessary to suspend a TTCS, the message “RED FLAG - SPRINT
+SUSPENDED” or “RED FLAG - RACE SUSPENDED”, as applicable, will be sent to all Competitors,
+red flags will be shown at all marshal posts and at the Line, and the orange lights on the start gantry
+will be illuminated. When the signal is given:
+a. Overtaking is forbidden.
+b. The Pit Lane exit will be closed, and all F1 Cars must proceed slowly into the Pit Lane. The first
+F1 Car to arrive in the Pit Lane should proceed directly to the Pit Lane exit, unless an alternative
+
+=== page 90 ===
+SECTION B: SPORTING
+B90
+2026 Formula 1: Sporting Regulations
+©2026 Fédération Internationale de l’Automobile
+25 June 2026
+Issue 07
+0B
+APPENDIX B4: PODIUM CEREMONY
+Advisory Committee: SAC
+Governance: F1 Commission / WMSC
+At each Event the procedure for the Podium Ceremony is detailed below.
+1. MASTER OF CEREMONIES
+A master of ceremonies will be appointed by the FIA to conduct and take responsibility for the entire
+podium ceremony.
+2. PODIUM
+a. ROSTRUM AND DAIS
+
+=== page 93 ===
+SECTION B: SPORTING
+B93
+2026 Formula 1: Sporting Regulations
+©2026 Fédération Internationale de l’Automobile
+25 June 2026
+Issue 07
+0B
+APPENDIX B5: APPROVED CHANGES TO SECTION B FOR SUBSEQUENT YEARS
+Advisory Committee: SAC
+Governance: F1 Commission / WMSC
+Changes for 2027
+ARTICLE B2: FORMAT OF A COMPETITION
+…/…
+B2.5 Race Session
+../..
+B2.5.2 Race Session Distance
