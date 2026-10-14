@@ -11,6 +11,7 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
+import { cleanPages } from "../ingest/clean.ts";
 import { readPdf } from "../ingest/pdf.ts";
 
 // From server/src/scripts (or server/dist/scripts after a build) up to the project root.
@@ -49,6 +50,17 @@ async function writeDryRunFile(name: string, data: unknown): Promise<void> {
   console.log(`  wrote ${path.relative(projectRoot, filePath)}`);
 }
 
+/** Shows page numbers as short ranges: [1, 2, 3, 7] → "1–3, 7". */
+function formatPages(pages: number[]): string {
+  const ranges: [first: number, last: number][] = [];
+  for (const page of pages) {
+    const current = ranges.at(-1);
+    if (current && page === current[1] + 1) current[1] = page;
+    else ranges.push([page, page]);
+  }
+  return ranges.map(([first, last]) => (first === last ? `${first}` : `${first}–${last}`)).join(", ") || "none";
+}
+
 async function main(): Promise<void> {
   const { season, file, dryRun } = parseCliArgs();
   if (!dryRun) {
@@ -65,6 +77,15 @@ async function main(): Promise<void> {
     issue,
     pages: pages.map(({ page, text }) => ({ page, lines: text.split("\n") })),
   });
+
+  console.log("Cleaning the text");
+  const cleaned = cleanPages(pages);
+  console.log(
+    `  skipped contents page${cleaned.contentsPages.length === 1 ? "" : "s"} ${formatPages(cleaned.contentsPages)}, ` +
+      `removed ${cleaned.removedRepeated} header/footer lines and ${cleaned.removedNoise} noise lines`,
+  );
+  console.log(`  ${cleaned.lines.length} lines of regulation text left`);
+  await writeDryRunFile(`${season}.lines.json`, cleaned);
 }
 
 main().catch((error: unknown) => {
