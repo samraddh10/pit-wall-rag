@@ -12,11 +12,13 @@
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:check": "tsx --env-file-if-exists=.env src/scripts/db-check.ts"
+    "db:check": "tsx --env-file-if-exists=.env src/scripts/db-check.ts",
+    "ingest": "tsx --env-file-if-exists=.env src/scripts/ingest.ts"
   },
   "dependencies": {
     "drizzle-orm": "0.45.4",
     "pg": "8.23.1",
+    "unpdf": "1.8.1",
     "zod": "4.6.6"
   },
   "devDependencies": {
