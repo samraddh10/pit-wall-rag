@@ -11,7 +11,8 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
-import { cleanPages } from "../ingest/clean.ts";
+import { chunkDocument, loadTokenCounter } from "../ingest/chunk.ts";
+import { cleanPages, type CleanLine } from "../ingest/clean.ts";
 import { readPdf } from "../ingest/pdf.ts";
 
 // From server/src/scripts (or server/dist/scripts after a build) up to the project root.
@@ -61,6 +62,12 @@ function formatPages(pages: number[]): string {
   return ranges.map(([first, last]) => (first === last ? `${first}` : `${first}–${last}`)).join(", ") || "none";
 }
 
+/** Prints how many lines there are, then each one with its page, so they can be checked by eye. */
+function printLines(label: string, lines: CleanLine[]): void {
+  console.log(`  ${label}: ${lines.length === 0 ? "none" : lines.length}`);
+  for (const { page, text } of lines) console.log(`    p. ${page}: ${text}`);
+}
+
 async function main(): Promise<void> {
   const { season, file, dryRun } = parseCliArgs();
   if (!dryRun) {
@@ -86,6 +93,20 @@ async function main(): Promise<void> {
   );
   console.log(`  ${cleaned.lines.length} lines of regulation text left`);
   await writeDryRunFile(`${season}.lines.json`, cleaned);
+
+  console.log("Chunking by article");
+  const countTokens = await loadTokenCounter();
+  const { articles, chunks, report } = chunkDocument(cleaned.lines, countTokens);
+  console.log(`  ${articles.length} articles, ${chunks.length} chunks`);
+  console.log(
+    report.skippedAppendix
+      ? `  skipped ${report.skippedAppendix} and everything after it (${report.skippedLines} lines)`
+      : "  skipped appendices: none",
+  );
+  printLines("heading-like lines kept as text", report.rejectedHeadings);
+  printLines("lines before the first heading", report.linesBeforeFirstHeading);
+  printLines("duplicate IDs", report.duplicateIds);
+  await writeDryRunFile(`${season}.chunks.json`, { season, report, articles, chunks });
 }
 
 main().catch((error: unknown) => {
