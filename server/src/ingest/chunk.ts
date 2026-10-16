@@ -1,8 +1,6 @@
 import { AutoTokenizer } from "@huggingface/transformers";
+import { EMBEDDING_MODEL } from "../rag/embedder.ts";
 import type { CleanLine } from "./clean.ts";
-
-/** The embedding model. Its tokenizer decides how much text fits in one chunk. */
-export const EMBEDDING_MODEL = "Xenova/all-MiniLM-L6-v2";
 
 /** all-MiniLM-L6-v2 reads at most 256 tokens; anything after that would be ignored. */
 export const MAX_CHUNK_TOKENS = 256;
@@ -87,7 +85,10 @@ const LIST_MARKER = /^(?:[a-z]|[ivx]+|\d+)[.)]$/;
 
 const sentences = new Intl.Segmenter("en", { granularity: "sentence" });
 
-/** Loads the embedding model's tokenizer (downloaded once, then read from the cache). */
+/**
+ * Loads the embedding model's tokenizer (downloaded once, then read from the cache).
+ * Its token count decides how much text fits in one chunk.
+ */
 export async function loadTokenCounter(): Promise<TokenCounter> {
   const tokenizer = await AutoTokenizer.from_pretrained(EMBEDDING_MODEL);
   return (text) => tokenizer.encode(text).length;
