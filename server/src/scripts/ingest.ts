@@ -4,6 +4,8 @@
  * Usage: npm run ingest -- --season 2026 [--file path/to/file.pdf] [--dry-run]
  *
  * --file defaults to data/raw/<season>.pdf.
+ * Without --dry-run, every chunk is embedded and the season is saved to the database,
+ * replacing any earlier copy of it.
  * --dry-run skips embedding and the database, and instead writes what each
  * step produced to data/processed/ so it can be inspected.
  */
@@ -11,9 +13,12 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
-import { chunkDocument, loadTokenCounter } from "../ingest/chunk.ts";
+import { closeDb } from "../db/client.ts";
+import { chunkDocument, loadTokenCounter, textToEmbed } from "../ingest/chunk.ts";
 import { cleanPages, type CleanLine } from "../ingest/clean.ts";
 import { readPdf } from "../ingest/pdf.ts";
+import { storeSeason } from "../ingest/store.ts";
+import { EMBEDDING_MODEL, embed } from "../rag/embedder.ts";
 
 // From server/src/scripts (or server/dist/scripts after a build) up to the project root.
 const projectRoot = path.resolve(import.meta.dirname, "../../..");
@@ -70,20 +75,19 @@ function printLines(label: string, lines: CleanLine[]): void {
 
 async function main(): Promise<void> {
   const { season, file, dryRun } = parseCliArgs();
-  if (!dryRun) {
-    throw new Error("Embedding and saving to the database aren't built yet. Run with --dry-run.");
-  }
 
   console.log(`Reading ${path.relative(projectRoot, file)}`);
   const { pages, issue } = await readPdf(file);
   console.log(`  ${pages.length} pages, ${issue ?? "issue not found"}`);
 
-  // Each page as a list of lines, so it's easy to see where every line starts.
-  await writeDryRunFile(`${season}.pages.json`, {
-    season,
-    issue,
-    pages: pages.map(({ page, text }) => ({ page, lines: text.split("\n") })),
-  });
+  if (dryRun) {
+    // Each page as a list of lines, so it's easy to see where every line starts.
+    await writeDryRunFile(`${season}.pages.json`, {
+      season,
+      issue,
+      pages: pages.map(({ page, text }) => ({ page, lines: text.split("\n") })),
+    });
+  }
 
   console.log("Cleaning the text");
   const cleaned = cleanPages(pages);
@@ -92,7 +96,7 @@ async function main(): Promise<void> {
       `removed ${cleaned.removedRepeated} header/footer lines and ${cleaned.removedNoise} noise lines`,
   );
   console.log(`  ${cleaned.lines.length} lines of regulation text left`);
-  await writeDryRunFile(`${season}.lines.json`, cleaned);
+  if (dryRun) await writeDryRunFile(`${season}.lines.json`, cleaned);
 
   console.log("Chunking by article");
   const countTokens = await loadTokenCounter();
@@ -106,10 +110,38 @@ async function main(): Promise<void> {
   printLines("heading-like lines kept as text", report.rejectedHeadings);
   printLines("lines before the first heading", report.linesBeforeFirstHeading);
   printLines("duplicate IDs", report.duplicateIds);
-  await writeDryRunFile(`${season}.chunks.json`, { season, report, articles, chunks });
+  if (dryRun) {
+    await writeDryRunFile(`${season}.chunks.json`, { season, report, articles, chunks });
+    console.log("Dry run: nothing was embedded or saved.");
+    return;
+  }
+
+  console.log(`Embedding ${chunks.length} chunks with ${EMBEDDING_MODEL}`);
+  const startedAt = performance.now();
+  // Each chunk is embedded with its header line, so the model knows which rule it belongs to.
+  const embeddings = await embed(chunks.map(textToEmbed));
+  console.log(`  done in ${((performance.now() - startedAt) / 1000).toFixed(1)} s`);
+
+  console.log("Saving to the database");
+  const replaced = await storeSeason({
+    season,
+    issue,
+    sourceFile: path.basename(file),
+    articles,
+    chunks: chunks.map((chunk, i) => ({ ...chunk, embedding: embeddings[i]! })),
+  });
+  console.log(
+    replaced
+      ? `  replaced the earlier copy of ${season} (${replaced.articleCount} articles, ${replaced.chunkCount} chunks)`
+      : `  ${season} wasn't in the database yet`,
+  );
+
+  console.log(`Done. Season ${season} (${issue ?? "issue not found"}): ${articles.length} articles, ${chunks.length} chunks.`);
 }
 
-main().catch((error: unknown) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+main()
+  .catch((error: unknown) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exitCode = 1;
+  })
+  .finally(closeDb);
