@@ -14,10 +14,14 @@
     "db:migrate": "drizzle-kit migrate",
     "db:check": "tsx --env-file-if-exists=.env src/scripts/db-check.ts",
     "ingest": "tsx --env-file-if-exists=.env src/scripts/ingest.ts",
-    "search": "tsx --env-file-if-exists=.env src/scripts/search.ts"
+    "search": "tsx --env-file-if-exists=.env src/scripts/search.ts",
+    "ask": "tsx --env-file-if-exists=.env src/scripts/ask.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "4.0.99",
+    "@ai-sdk/groq": "4.0.63",
     "@huggingface/transformers": "4.3.1",
+    "ai": "7.0.143",
     "drizzle-orm": "0.45.4",
     "pg": "8.23.1",
     "unpdf": "1.8.1",
