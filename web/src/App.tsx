@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { Chat } from "./components/Chat.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { Header } from "./components/Header.tsx";
 import { SeasonSelector } from "./components/SeasonSelector.tsx";
 import { WakeBanner } from "./components/WakeBanner.tsx";
 
-/** The page: header with the season selector, wake-up banner, main area and footer. */
+/** The page: header with the season selector, wake-up banner, the chat and footer. */
 export function App() {
   // True once the server has answered the wake-up ping. The season list waits for it.
   const [serverAwake, setServerAwake] = useState(false);
@@ -18,12 +19,7 @@ export function App() {
       </Header>
       <WakeBanner onAwake={() => setServerAwake(true)} />
       <main>
-        <h2>Ask the rulebook</h2>
-        <p>
-          Ask a question about the {season !== null && `${season} `}FIA Formula 1 Sporting
-          Regulations. Every answer cites the article it came from, and each citation is checked
-          before it's shown.
-        </p>
+        <Chat season={season} />
       </main>
       <Footer />
     </>
