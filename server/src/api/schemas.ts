@@ -20,3 +20,9 @@ export const articleParamsSchema = z.object({
   season: seasonSchema,
   articleId: articleIdSchema,
 });
+
+/** POST /api/ask. Spaces around the question are removed first, so "   " counts as empty. */
+export const askBodySchema = z.object({
+  question: z.string().trim().min(1).max(500),
+  season: seasonSchema,
+});
