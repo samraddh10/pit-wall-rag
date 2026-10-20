@@ -1,0 +1,53 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 2px;
+  padding: 0 6px;
+  border: 1px solid;
+  border-radius: 5px;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  line-height: 1.6;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.chip:hover {
+  filter: brightness(1.25);
+}
+
+/* Green: the cited article is one of the sources */
+.verified {
+  color: var(--verified);
+  border-color: rgb(34 197 94 / 0.5);
+  background: rgb(34 197 94 / 0.1);
+}
+
+/* Yellow: the answer is still arriving, so it isn't checked yet */
+.checking {
+  color: var(--checking);
+  border-color: rgb(250 204 21 / 0.45);
+  background: rgb(250 204 21 / 0.08);
+}
+
+/* Grey and struck through: cited, but not one of the sources, so don't trust it */
+.unverified {
+  color: var(--unverified);
+  border-color: rgb(107 114 128 / 0.6);
+}
+
+.unverified .id {
+  text-decoration: line-through;
+}
+
+/* Hidden on screen, still read by screen readers */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
