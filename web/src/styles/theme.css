@@ -1,0 +1,84 @@
+/*
+ * The pit-wall theme: colours, fonts and page layout shared by the whole app.
+ * Each component keeps its own styles in a CSS Module (Name.module.css) and uses these variables.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Carbon-black surfaces */
+  --bg: #0a0b0d;
+  --surface: #121418;
+  --surface-raised: #1a1d22;
+  --border: #272b32;
+  --text: #e9ebee;
+  --text-muted: #8d949f;
+
+  /* F1 red, used sparingly: the logo mark and real errors */
+  --red: #e10600;
+
+  /* Citation status, read like timing-screen sector colours */
+  --verified: #22c55e; /* green: the cited article is among the sources */
+  --checking: #facc15; /* yellow: the answer is still arriving, not checked yet */
+  --unverified: #6b7280; /* grey, struck through: cited, but not among the sources */
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Timing-screen look for article IDs and seasons */
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --radius: 8px;
+  --content-width: 760px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header, banner, main and footer stacked; main takes the spare height so the footer stays at the bottom. */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
