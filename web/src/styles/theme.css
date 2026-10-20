@@ -14,7 +14,7 @@
   --text: #e9ebee;
   --text-muted: #8d949f;
 
-  /* F1 red, used sparingly: the logo mark and real errors */
+  /* F1 red, used sparingly: real errors only */
   --red: #e10600;
 
   /* Citation status, read like timing-screen sector colours */
