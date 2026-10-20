@@ -6,28 +6,39 @@
 :root {
   color-scheme: dark;
 
-  /* Carbon-black surfaces */
+  /* Carbon-black surfaces, darkest first */
   --bg: #0a0b0d;
-  --surface: #121418;
-  --surface-raised: #1a1d22;
-  --border: #272b32;
-  --text: #e9ebee;
-  --text-muted: #8d949f;
+  --bar: #0d0e11; /* header and footer */
+  --surface: #0f1114;
+  --surface-raised: #121418;
+  --surface-hover: #14171b;
+  --border: #2a2e36;
+  --border-soft: #22262d;
+  --border-hover: #3a4049;
+  --divider: #1c1f25;
+  --text: #eef0f2;
+  --text-muted: #a3a9b3;
+  --text-dim: #8b919b;
 
-  /* F1 red, used sparingly: real errors only */
-  --red: #e10600;
+  /* F1 red, used sparingly: the Ask button, small labels and real errors */
+  --red: #cf2b20;
+  --red-hover: #b52218;
+  /* A lighter red for small text and focus rings, so it stays readable on black */
+  --accent: #f0574b;
 
   /* Citation status, read like timing-screen sector colours */
   --verified: #22c55e; /* green: the cited article is among the sources */
   --checking: #facc15; /* yellow: the answer is still arriving, not checked yet */
   --unverified: #6b7280; /* grey, struck through: cited, but not among the sources */
 
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  /* Timing-screen look for article IDs and seasons */
-  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  --font-sans: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Tall, narrow capitals for the name and the big heading, like F1 graphics */
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  /* Timing-screen look for article IDs, seasons and small labels */
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
 
   --radius: 8px;
-  --content-width: 760px;
+  --content-width: 800px;
 }
 
 *,
@@ -51,12 +62,13 @@ body {
   min-height: 100dvh;
 }
 
+/* A column, so the chat inside can stretch to the full height and keep the input box at the bottom */
 main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 40px 16px;
+  padding: 0 24px;
 }
 
 h1,
@@ -78,8 +90,13 @@ textarea {
   color: inherit;
 }
 
+::selection {
+  background: var(--red);
+  color: #fff;
+}
+
 :focus-visible {
-  outline: 2px solid var(--text);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -91,7 +108,7 @@ html:has(dialog[open]) {
 /* Phones and narrow windows: less empty space, so more of the small screen shows the chat */
 @media (max-width: 767px) {
   main {
-    padding: 20px 12px 8px;
+    padding: 0 12px;
   }
 
   h2 {

@@ -1,60 +1,139 @@
-/* Stays at the bottom of the screen while the answers scroll past */
+/*
+ * Always at the bottom: pushed down by margin-top: auto when the page is short, and stuck to the
+ * bottom of the screen while longer content scrolls past.
+ */
 .composer {
   position: sticky;
   bottom: 0;
-  padding: 12px 0 16px;
+  margin-top: auto;
+  padding: 8px 0 12px;
   background: linear-gradient(to bottom, transparent, var(--bg) 14px);
 }
 
 .box {
   display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  padding: 8px;
+  flex-direction: column;
+  overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
+  border-radius: 14px;
+  background: var(--surface-raised);
+  box-shadow: 0 24px 48px -24px rgb(0 0 0 / 0.7);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
-/* The box's border shows keyboard focus, so the text area itself needs no outline */
+/* A soft red glow shows keyboard focus, so the text area itself needs no outline */
 .box:focus-within {
-  border-color: var(--text-muted);
+  border-color: #4a515c;
+  box-shadow:
+    0 0 0 4px rgb(207 43 32 / 0.22),
+    0 24px 48px -24px rgb(0 0 0 / 0.7);
 }
 
+.label {
+  padding: 12px 18px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* The text and the Ask button side by side; the button lines up with the first line of text */
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0 8px 8px 0;
+}
+
+/* One line to start; it grows with the text (field-sizing: content) up to five lines, then scrolls */
 .input {
   flex: 1;
   min-width: 0;
-  padding: 6px 8px;
+  max-height: calc(5 * 1.5em + 16px);
+  padding: 6px 0 10px 18px;
   border: 0;
   background: transparent;
+  font-size: 18px;
   line-height: 1.5;
+  field-sizing: content;
   resize: none;
   outline: none;
 }
 
 .input::placeholder {
-  color: var(--text-muted);
+  color: var(--text-dim);
+}
+
+/* Same height as the button, so the number sits level with it */
+.count {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 44px;
+  color: var(--text-dim);
 }
 
 .send {
-  padding: 8px 18px;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 18px 0 22px;
   border: 0;
-  border-radius: var(--radius);
-  background: var(--text);
-  color: var(--bg);
+  border-radius: 10px;
+  background: var(--red);
+  color: #fff;
+  font-size: 16px;
   font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.send:hover:enabled {
+  background: var(--red-hover);
 }
 
 .send:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: default;
 }
 
-.count {
-  margin: 6px 4px 0;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-align: right;
-  color: var(--text-muted);
+/* Phones: the box shrinks to a single row, so the page above it keeps most of the small screen */
+@media (max-width: 560px) {
+  /* Still read by screen readers */
+  .label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .row {
+    align-items: center;
+    padding: 0 6px 0 0;
+  }
+
+  .input {
+    height: 56px;
+    padding: 14px 4px 14px 16px;
+    font-size: 16px;
+    field-sizing: fixed;
+  }
+
+  /* Placeholder text too long for the row is cut at the edge, instead of wrapping onto a second line the row would cut in half */
+  .input::placeholder {
+    white-space: nowrap;
+  }
+
+  .send {
+    padding: 0 14px 0 16px;
+  }
 }

@@ -14,10 +14,17 @@ export type AskMessage = UIMessage<unknown, AskDataParts>;
 
 /** Questions the retrieval eval answers from the right article (rank 1), so they make a good first try. */
 const EXAMPLE_QUESTIONS = [
-  "What happens if the race gets red-flagged?",
-  "How fast are cars allowed to drive in the pit lane?",
-  "What is the 107% rule in qualifying?",
-  "Do drivers have to run two different tyre compounds in a dry race?",
+  { topic: "Race control", question: "What happens if the race gets red-flagged?" },
+  { topic: "Pit lane", question: "How fast are cars allowed to drive in the pit lane?" },
+  { topic: "Qualifying", question: "What is the 107% rule in qualifying?" },
+  { topic: "Tyres", question: "Do drivers have to run two different tyre compounds in a dry race?" },
+];
+
+/** The three steps behind every answer, shown under the example questions. */
+const STEPS = [
+  { title: "Find the articles", text: "Searches the issue of the regulations you’ve selected." },
+  { title: "Write the answer", text: "Every claim points back to the article it came from." },
+  { title: "Check each citation", text: "Each cited article must be one the answer was written from." },
 ];
 
 /**
@@ -64,17 +71,25 @@ function describeError(error: Error): Notice {
 interface ChatProps {
   /** The season to ask about; null until the list of seasons has loaded. */
   season: number | null;
+  /** The season's issue, e.g. "Issue 07"; null if unknown. */
+  issue: string | null;
 }
 
 /**
- * The chat: example questions to start, then the questions and streamed answers, then the input box.
+ * The chat. The input box stays at the bottom of the screen. Above it, the start screen shows an
+ * intro, example questions and how answers are checked; after the first question, the questions
+ * and streamed answers.
  * Clicking a citation chip opens the article panel on top.
  */
-export function Chat({ season }: ChatProps) {
+export function Chat({ season, issue }: ChatProps) {
   const { messages, sendMessage, status, error } = useChat<AskMessage>({ transport });
   // "submitted": waiting for the reply to start. "streaming": the reply is arriving.
   const busy = status === "submitted" || status === "streaming";
   const canAsk = season !== null && !busy;
+  const started = messages.length > 0;
+  // The text in the input box, and the example question that filled it (highlighted until edited).
+  const [draft, setDraft] = useState("");
+  const [picked, setPicked] = useState<string | null>(null);
   // The article shown in the side panel; null while it's closed.
   const [openArticle, setOpenArticle] = useState<{ season: number; articleId: string } | null>(null);
 
@@ -82,6 +97,8 @@ export function Chat({ season }: ChatProps) {
     if (season === null || busy) return;
     // The season goes with each question, so switching seasons only affects the next question.
     void sendMessage({ text: question }, { body: { season } });
+    setDraft("");
+    setPicked(null);
   }
 
   /** Called by a citation chip. Chips that don't know their season use the season being asked about. */
@@ -101,42 +118,104 @@ export function Chat({ season }: ChatProps) {
     );
   }
 
+  // The Composer keeps the same place in the tree on both screens ({!started && …} still holds a
+  // place when it's false), so the box keeps focus when the first question starts the conversation.
   return (
-    <div className={styles.chat}>
-      {messages.length === 0 ? (
-        <section>
-          <h2>Ask the rulebook</h2>
+    <div className={started ? styles.chat : `${styles.chat} ${styles.start}`}>
+      {started ? (
+        // Every citation chip inside the answers can call showArticle through this context.
+        <OpenArticleContext value={showArticle}>
+          <MessageList messages={messages} busy={busy} notice={notice} />
+        </OpenArticleContext>
+      ) : (
+        <div className={styles.intro}>
+          <p className={styles.eyebrow}>
+            {/* A chequered-flag stripe */}
+            <span className={styles.flag} aria-hidden="true" />
+            {season ?? "F1"} Sporting Regulations{issue && ` · ${issue}`}
+          </p>
+          <h2 className={styles.heading}>Ask the rulebook.</h2>
           <p className={styles.lead}>
             Ask a question about the {season !== null && `${season} `}FIA Formula 1 Sporting
             Regulations. Every answer cites the article it came from, and each citation is checked
             before it's shown.
           </p>
-          <div className={styles.examples}>
-            {EXAMPLE_QUESTIONS.map((question) => (
-              <button
-                key={question}
-                type="button"
-                className={styles.example}
-                disabled={!canAsk}
-                onClick={() => ask(question)}
-              >
-                {question}
-              </button>
+        </div>
+      )}
+
+      {!started && (
+        <>
+          <section className={styles.examples} aria-labelledby="examples-heading">
+            <h3 id="examples-heading" className={styles.smallHeading}>
+              Or start with one of these
+            </h3>
+            <div className={styles.exampleGrid}>
+              {EXAMPLE_QUESTIONS.map(({ topic, question }) => (
+                // Fills the box, so the question can be read or edited before asking it.
+                <button
+                  key={question}
+                  type="button"
+                  className={styles.example}
+                  aria-pressed={picked === question}
+                  onClick={() => {
+                    setDraft(question);
+                    setPicked(question);
+                  }}
+                >
+                  <span className={styles.exampleText}>
+                    <span className={styles.topic}>{topic}</span>
+                    <span className={styles.question}>{question}</span>
+                  </span>
+                  <svg
+                    className={styles.arrow}
+                    aria-hidden="true"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m13 6 6 6-6 6" />
+                  </svg>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <ol className={styles.steps} aria-label="How answers are checked">
+            {STEPS.map(({ title, text }, index) => (
+              <li key={title} className={styles.step}>
+                <span className={styles.stepNumber}>{String(index + 1).padStart(2, "0")}</span>
+                <span className={styles.stepText}>
+                  <strong>{title}</strong>
+                  <span>{text}</span>
+                </span>
+              </li>
             ))}
-          </div>
-        </section>
-      ) : (
-        // Every citation chip inside the answers can call showArticle through this context.
-        <OpenArticleContext value={showArticle}>
-          <MessageList messages={messages} busy={busy} notice={notice} />
-        </OpenArticleContext>
+          </ol>
+        </>
       )}
 
       <Composer
+        value={draft}
+        onChange={(text) => {
+          setDraft(text);
+          setPicked(null);
+        }}
         onSend={ask}
         disabled={!canAsk}
         busy={busy}
-        placeholder={season === null ? "Waiting for the server…" : "Ask about the rules…"}
+        placeholder={
+          season === null
+            ? "Waiting for the server…"
+            : started
+              ? "Ask another question…"
+              : "Ask about penalties, tyres…"
+        }
       />
 
       {openArticle && (

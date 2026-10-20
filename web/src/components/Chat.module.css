@@ -1,39 +1,192 @@
+/* Fills the height of main, so the input box (last inside) can sit at the bottom even when there's little above it */
 .chat {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding-top: 32px;
+}
+
+/*
+ * The start screen fits in one window without scrolling. Its spacing and heading grow and shrink
+ * with the window's height (vh = 1% of it), between a small and a large limit.
+ */
+.start {
+  gap: clamp(12px, 2.5vh, 36px);
+  padding-top: clamp(12px, 4vh, 64px);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.4vh, 18px);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Red and white blocks, like a chequered flag seen edge-on */
+.flag {
+  flex: none;
+  width: 36px;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 9px, var(--text) 9px 18px);
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(40px, min(6vw, 8.5vh), 80px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
 }
 
 .lead {
+  max-width: 640px;
   margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
   color: var(--text-muted);
+  text-wrap: pretty;
 }
 
 .examples {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 20px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.smallHeading {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Every row as tall as the tallest, so all four cards are the same size whether their question takes one line or two */
+.exampleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  grid-auto-rows: 1fr;
+  gap: 10px;
 }
 
 .example {
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
   background: var(--surface);
-  font-size: 0.9rem;
   text-align: left;
   cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
 }
 
-.example:hover:enabled {
-  border-color: var(--text-muted);
-  background: var(--surface-raised);
+.example:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
 }
 
-.example:disabled {
-  opacity: 0.5;
-  cursor: default;
+/* The example that filled the input box */
+.example[aria-pressed="true"] {
+  border-color: var(--red);
+  background: #1a1214;
+}
+
+.exampleText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.topic {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.question {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.arrow {
+  flex: none;
+  color: #6b717b;
+  transition:
+    transform 0.15s,
+    color 0.15s;
+}
+
+.example:hover .arrow {
+  color: var(--text);
+  transform: translateX(3px);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: clamp(10px, 2vh, 20px) 0 0;
+  border-top: 1px solid var(--divider);
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--accent);
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.stepText strong {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text);
 }
 
 .error,
@@ -55,4 +208,109 @@
 .rateLimit {
   background: rgb(250 204 21 / 0.08);
   border-color: rgb(250 204 21 / 0.35);
+}
+
+/* Short windows (e.g. a laptop with the browser's bars): tighter spacing, and the steps keep only their titles */
+@media (max-height: 710px) {
+  .start {
+    gap: 12px;
+    padding-top: 16px;
+  }
+
+  .stepText > span {
+    display: none;
+  }
+}
+
+/* Very short windows: the steps go, so the examples and the input box still fit */
+@media (max-height: 620px) {
+  .steps {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .chat {
+    padding-top: 20px;
+  }
+
+  /* Keeps "2026 SPORTING REGULATIONS · ISSUE 07" on one line on a phone */
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* Phones: examples in a 2 × 2 grid with smaller text, and the steps as three short titles */
+@media (max-width: 560px) {
+  .start {
+    gap: 10px;
+    padding-top: 12px;
+  }
+
+  .intro {
+    gap: 8px;
+  }
+
+  .heading {
+    font-size: 38px;
+  }
+
+  .lead {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .exampleGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .example {
+    align-items: flex-start;
+    padding: 8px 12px;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  .topic {
+    font-size: 10px;
+  }
+
+  .question {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .steps {
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  .step {
+    gap: 6px;
+  }
+
+  .stepText > span {
+    display: none;
+  }
+
+  .stepText strong {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .stepNumber {
+    font-size: 11px;
+    line-height: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .example,
+  .arrow {
+    transition: none;
+  }
 }
