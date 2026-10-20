@@ -14,8 +14,11 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@ai-sdk/react": "4.0.147",
+    "ai": "7.0.143",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "react-markdown": "10.1.0"
   },
   "devDependencies": {
     "@types/node": "22.20.5",
