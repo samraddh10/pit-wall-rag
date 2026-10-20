@@ -1,0 +1,75 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* The visitor's question, on the right like a chat bubble */
+.question {
+  align-self: flex-end;
+  max-width: 85%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px 12px 4px 12px;
+  background: var(--surface-raised);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  scroll-margin-top: 16px;
+}
+
+.answer {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+/* An error that stopped the answer, right under the text it cut off */
+.answer > [role="alert"] {
+  margin-top: 12px;
+}
+
+/* Dashed grey, so "not found" never looks like a real answer */
+.notFound {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px dashed var(--unverified);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
+.notFound strong {
+  color: var(--text);
+}
+
+.working {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.light {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--checking);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .light {
+    animation: none;
+  }
+}
