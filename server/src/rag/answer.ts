@@ -1,4 +1,4 @@
-import { generateText, type ModelMessage } from "ai";
+import { generateText, streamText, type ModelMessage } from "ai";
 import { validateCitations, type CitationCheck } from "./citations.ts";
 import { getModel, LLM_SETTINGS } from "./llm.ts";
 import { buildUserPrompt, SYSTEM_PROMPT } from "./prompt.ts";
@@ -42,4 +42,12 @@ export async function answerQuestion(question: string, season: number): Promise<
 
   const { text } = await generateText({ model: getModel(), ...LLM_SETTINGS, instructions, messages });
   return { answer: text, sources, citations: validateCitations(text, sources) };
+}
+
+/**
+ * Starts the model's answer as a stream, for the API: the words arrive while they are written.
+ * Same model, settings and messages as `answerQuestion`, so both give the same kind of answer.
+ */
+export function streamAnswer({ instructions, messages }: PreparedAnswer) {
+  return streamText({ model: getModel(), ...LLM_SETTINGS, instructions, messages });
 }
