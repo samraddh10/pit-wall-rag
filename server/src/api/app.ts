@@ -4,6 +4,7 @@ import { z } from "zod";
 import { getConfig } from "../config.ts";
 import type { ErrorResponse } from "../shared/api-types.ts";
 import { articlesRouter } from "./routes/articles.ts";
+import { askRouter } from "./routes/ask.ts";
 import { healthRouter } from "./routes/health.ts";
 import { seasonsRouter } from "./routes/seasons.ts";
 
@@ -65,6 +66,7 @@ export function createApp(): Express {
   app.use("/api/health", healthRouter);
   app.use("/api/seasons", seasonsRouter);
   app.use("/api/articles", articlesRouter);
+  app.use("/api/ask", askRouter);
 
   app.use(notFound);
   app.use(errorHandler);
