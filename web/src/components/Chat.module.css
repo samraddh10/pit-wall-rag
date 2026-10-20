@@ -25,26 +25,6 @@
   gap: clamp(6px, 1.4vh, 18px);
 }
 
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-/* Red and white blocks, like a chequered flag seen edge-on */
-.flag {
-  flex: none;
-  width: 36px;
-  height: 4px;
-  background: repeating-linear-gradient(90deg, var(--accent) 0 9px, var(--text) 9px 18px);
-}
-
 .heading {
   margin: 0;
   font-family: var(--font-display);
@@ -232,12 +212,6 @@
 @media (max-width: 767px) {
   .chat {
     padding-top: 20px;
-  }
-
-  /* Keeps "2026 SPORTING REGULATIONS · ISSUE 07" on one line on a phone */
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.1em;
   }
 }
 

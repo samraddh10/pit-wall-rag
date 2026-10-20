@@ -8,8 +8,7 @@ interface SeasonSelectorProps {
   serverAwake: boolean;
   /** The chosen season, or null before the list has loaded. */
   season: number | null;
-  /** Gets the whole summary, so the page can also show the issue (e.g. "Issue 07"). */
-  onSeasonChange: (season: SeasonSummary) => void;
+  onSeasonChange: (season: number) => void;
 }
 
 /** "2026 · Issue 07", or just "2026" if the issue couldn't be read from the PDF. */
@@ -33,7 +32,7 @@ export function SeasonSelector({ serverAwake, season, onSeasonChange }: SeasonSe
         setSeasons(response.seasons);
         // The API lists the newest season first.
         const newest = response.seasons[0];
-        if (newest) selectSeason(newest);
+        if (newest) selectSeason(newest.season);
       })
       .catch((caught: unknown) => {
         // An abort means this component is going away, so there's nothing to show.
@@ -56,10 +55,7 @@ export function SeasonSelector({ serverAwake, season, onSeasonChange }: SeasonSe
         <select
           className={styles.select}
           value={season ?? ""}
-          onChange={(event) => {
-            const picked = seasons.find((summary) => summary.season === Number(event.target.value));
-            if (picked) onSeasonChange(picked);
-          }}
+          onChange={(event) => onSeasonChange(Number(event.target.value))}
         >
           {seasons.map((summary) => (
             <option key={summary.season} value={summary.season}>

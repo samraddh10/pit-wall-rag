@@ -71,8 +71,6 @@ function describeError(error: Error): Notice {
 interface ChatProps {
   /** The season to ask about; null until the list of seasons has loaded. */
   season: number | null;
-  /** The season's issue, e.g. "Issue 07"; null if unknown. */
-  issue: string | null;
 }
 
 /**
@@ -81,7 +79,7 @@ interface ChatProps {
  * and streamed answers.
  * Clicking a citation chip opens the article panel on top.
  */
-export function Chat({ season, issue }: ChatProps) {
+export function Chat({ season }: ChatProps) {
   const { messages, sendMessage, status, error } = useChat<AskMessage>({ transport });
   // "submitted": waiting for the reply to start. "streaming": the reply is arriving.
   const busy = status === "submitted" || status === "streaming";
@@ -129,11 +127,6 @@ export function Chat({ season, issue }: ChatProps) {
         </OpenArticleContext>
       ) : (
         <div className={styles.intro}>
-          <p className={styles.eyebrow}>
-            {/* A chequered-flag stripe */}
-            <span className={styles.flag} aria-hidden="true" />
-            {season ?? "F1"} Sporting Regulations{issue && ` · ${issue}`}
-          </p>
           <h2 className={styles.heading}>Ask the rulebook.</h2>
           <p className={styles.lead}>
             Ask a question about the {season !== null && `${season} `}FIA Formula 1 Sporting
