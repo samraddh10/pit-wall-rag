@@ -15,7 +15,8 @@
     "db:check": "tsx --env-file-if-exists=.env src/scripts/db-check.ts",
     "ingest": "tsx --env-file-if-exists=.env src/scripts/ingest.ts",
     "search": "tsx --env-file-if-exists=.env src/scripts/search.ts",
-    "ask": "tsx --env-file-if-exists=.env src/scripts/ask.ts"
+    "ask": "tsx --env-file-if-exists=.env src/scripts/ask.ts",
+    "eval:retrieval": "tsx --env-file-if-exists=.env src/scripts/eval-retrieval.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "4.0.99",
