@@ -1,0 +1,75 @@
+.sources {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.heading {
+  margin: 0 0 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each source is a <details>: click the line to open its text */
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  list-style: none;
+  cursor: pointer;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::before {
+  content: "▸";
+  color: var(--text-muted);
+}
+
+.source[open] > .summary::before {
+  content: "▾";
+}
+
+.summary:hover {
+  background: var(--surface-raised);
+}
+
+.id {
+  font-family: var(--font-mono);
+}
+
+.title {
+  color: var(--text-muted);
+}
+
+.meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* pre-line keeps the PDF's line breaks, so lettered items (a., b.) stay on their own lines */
+.excerpt {
+  margin: 4px 6px 10px 20px;
+  padding: 8px 12px;
+  border-left: 2px solid var(--border);
+  font-size: 0.875rem;
+  white-space: pre-line;
+  color: var(--text-muted);
+}
