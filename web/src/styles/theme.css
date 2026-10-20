@@ -82,3 +82,19 @@ textarea {
   outline: 2px solid var(--text);
   outline-offset: 2px;
 }
+
+/* While the article panel (a <dialog>) is open, the page behind it stays still */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* Phones and narrow windows: less empty space, so more of the small screen shows the chat */
+@media (max-width: 767px) {
+  main {
+    padding: 20px 12px 8px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+}
