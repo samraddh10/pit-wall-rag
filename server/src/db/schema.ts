@@ -11,7 +11,7 @@ import {
   vector,
 } from "drizzle-orm/pg-core";
 
-/** Size of one embedding from all-MiniLM-L6-v2. */
+/** Size of one embedding from bge-small-en-v1.5. */
 export const EMBEDDING_DIMENSIONS = 384;
 
 /** One row per ingested regulations document (one season). */

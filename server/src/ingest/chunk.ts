@@ -2,7 +2,10 @@ import { AutoTokenizer } from "@huggingface/transformers";
 import { EMBEDDING_MODEL } from "../rag/embedder.ts";
 import type { CleanLine } from "./clean.ts";
 
-/** all-MiniLM-L6-v2 reads at most 256 tokens; anything after that would be ignored. */
+/**
+ * The most tokens one chunk's embedded text may have. bge-small-en-v1.5 reads up to 512; chunks
+ * stay at 256 (the limit of the model used before it), so changing the model didn't change the chunks.
+ */
 export const MAX_CHUNK_TOKENS = 256;
 
 /** Counts the tokens in a text the way the embedding model does. */

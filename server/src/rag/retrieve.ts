@@ -1,7 +1,7 @@
 import { cosineDistance, eq, sql } from "drizzle-orm";
 import { db } from "../db/client.ts";
 import { chunks } from "../db/schema.ts";
-import { embed } from "./embedder.ts";
+import { embedQuestion } from "./embedder.ts";
 
 /** How many chunks a question gets by default: enough to answer most questions, small enough for the LLM. */
 export const DEFAULT_TOP_K = 5;
@@ -32,9 +32,9 @@ export async function retrieve(
   season: number,
   k: number = DEFAULT_TOP_K,
 ): Promise<RetrievedChunk[]> {
-  const [questionVector] = await embed([question]);
+  const questionVector = await embedQuestion(question);
   // Cosine distance is 0 for the same direction and grows as meanings drift apart.
-  const distance = cosineDistance(chunks.embedding, questionVector!);
+  const distance = cosineDistance(chunks.embedding, questionVector);
 
   return db
     .select({
