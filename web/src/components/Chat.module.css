@@ -1,0 +1,58 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lead {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.example {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.example:hover:enabled {
+  border-color: var(--text-muted);
+  background: var(--surface-raised);
+}
+
+.example:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.error,
+.rateLimit {
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+/* Red: something failed */
+.error {
+  background: rgb(225 6 0 / 0.1);
+  border-color: rgb(225 6 0 / 0.45);
+}
+
+/* Yellow: nothing is broken, the visitor just has to wait a minute */
+.rateLimit {
+  background: rgb(250 204 21 / 0.08);
+  border-color: rgb(250 204 21 / 0.35);
+}
