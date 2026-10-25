@@ -1,4 +1,5 @@
 import { pipeline, type FeatureExtractionPipeline } from "@huggingface/transformers";
+import { getConfig } from "../config.ts";
 
 /**
  * The embedding model. Ingestion and questions must use the same model and settings,
@@ -14,10 +15,17 @@ const QUESTION_PREFIX = "Represent this sentence for searching relevant passages
 
 let extractor: Promise<FeatureExtractionPipeline> | undefined;
 
-/** Loads the model once (downloaded on first use, then read from the cache) and reuses it. */
+/**
+ * Loads the model once (downloaded on first use, then read from MODEL_CACHE_DIR) and reuses it.
+ * In production the folder is filled at build time by `npm run model:prefetch`, so a waking
+ * server reads the model from disk instead of downloading it again.
+ */
 function getExtractor(): Promise<FeatureExtractionPipeline> {
   // The 8-bit (q8) weights are about 4× smaller than the full ones, with near-identical results.
-  extractor ??= pipeline("feature-extraction", EMBEDDING_MODEL, { dtype: "q8" });
+  extractor ??= pipeline("feature-extraction", EMBEDDING_MODEL, {
+    dtype: "q8",
+    cache_dir: getConfig().MODEL_CACHE_DIR,
+  });
   return extractor;
 }
 
