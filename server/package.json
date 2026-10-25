@@ -19,7 +19,8 @@
     "ingest": "tsx --env-file-if-exists=.env src/scripts/ingest.ts",
     "search": "tsx --env-file-if-exists=.env src/scripts/search.ts",
     "ask": "tsx --env-file-if-exists=.env src/scripts/ask.ts",
-    "eval:retrieval": "tsx --env-file-if-exists=.env src/scripts/eval-retrieval.ts"
+    "eval:retrieval": "tsx --env-file-if-exists=.env src/scripts/eval-retrieval.ts",
+    "model:prefetch": "tsx --env-file-if-exists=.env src/scripts/prefetch-model.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "4.0.99",
