@@ -7,7 +7,7 @@ checked in code against the articles that were actually retrieved before it's sh
 **Live demo: [pit-wall-rag.vercel.app](https://pit-wall-rag.vercel.app)**. The API runs on a free
 server that sleeps when nobody uses it, so the first question can take up to a minute.
 
-![An answer about red flags, with green verified citation chips and the five retrieved sources](docs/screenshots/answer.jpg)
+![An answer about grid penalties for extra power unit parts, with a green verified citation chip and the five retrieved sources](docs/screenshots/answer.png)
 
 ## What it does
 
@@ -22,7 +22,7 @@ server that sleeps when nobody uses it, so the first question can take up to a m
 
 <table>
   <tr>
-    <td><img src="docs/screenshots/article-panel.jpg" alt="Clicking a citation chip opens the full text of Article B5.14.2 with the clause highlighted" width="600"></td>
+    <td><img src="docs/screenshots/article-panel.png" alt="Clicking a citation chip opens the full text of Article B8.2.8 with the clause highlighted" width="600"></td>
     <td><img src="docs/screenshots/mobile.png" alt="The start screen on a phone, with example questions" width="200"></td>
   </tr>
   <tr>
